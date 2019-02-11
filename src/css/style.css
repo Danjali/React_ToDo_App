@@ -1,0 +1,10 @@
+body {
+    background-color: #eee;
+    font-family: 'Raleway', sans-serif;
+}
+.btn, h1 {
+  margin: 10px;
+}
+.input {
+  margin: 15px;
+}
