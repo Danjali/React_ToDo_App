@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
 export default class TodoList extends React.Component {
   constructor(){
@@ -30,11 +29,11 @@ export default class TodoList extends React.Component {
         <ul className="displayList">
           {
             items.map((item, index) => {
-              return <li key={index}> {item.text} </li>
+              return <li key={index}> {item.text} </li>;
             })
           }
         </ul>
       </div>
-    )
+    );
   }
 }
