@@ -2,9 +2,23 @@ body {
     background-color: #eee;
     font-family: 'Raleway', sans-serif;
 }
-.btn, h1 {
-  margin: 10px;
+.h1, h1 {
+  font-size: 36px;
+  margin: 15px;
 }
 .input {
   margin: 15px;
+}
+.actionButton {
+  float: right;
+}
+.displayList {
+  width: 350px;
+  margin-top: 15px;
+}
+.list {
+  padding: 0px 0px 20px 0px;
+}
+.listText {
+  float: left;
 }

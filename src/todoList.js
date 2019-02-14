@@ -1,4 +1,5 @@
 import React from 'react';
+import ItemList from './itemList';
 
 export default class TodoList extends React.Component {
   constructor(){
@@ -7,6 +8,7 @@ export default class TodoList extends React.Component {
       items: []
     };
     this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   addItem() {
@@ -19,20 +21,24 @@ export default class TodoList extends React.Component {
     }
   }
 
+  deleteItem(id) {
+    this.setState({
+         items: this.state.items.filter((items,key) => key !== id)
+    })
+  }
+
   render() {
     let { items } = this.state;
     return (
       <div className="list">
         <h1>ToDo List</h1>
-        <input className="input" ref="taskInput"  type="text" placeholder="enter task"/>
-        <button className="btn" onClick={this.addItem}>Add</button>
-        <ul className="displayList">
-          {
-            items.map((item, index) => {
-              return <li key={index}> {item.text} </li>;
-            })
-          }
-        </ul>
+        <div>
+          <input className="input" ref="taskInput"  type="text" placeholder="enter task"/>
+          <button onClick={this.addItem}>Add</button>
+        </div>
+        <div>
+          <ItemList listItems={items} deleteItem={this.deleteItem}/>
+        </div>
       </div>
     );
   }
