@@ -3,7 +3,15 @@ import React from 'react';
 export default class ItemList extends React.Component {
 
   deleteItem(index) {
-        this.props.deleteItem(index);
+    this.props.deleteItem(index);
+  }
+
+  markCompletedItem(index) {
+    this.props.markCompletedItem(index);
+  }
+
+  editItem(index) {
+    this.props.editItem(index);
   }
 
   render() {
@@ -14,8 +22,15 @@ export default class ItemList extends React.Component {
           items.map((item, index) => {
             return (
               <li key={index} className="list">
-                <span className="listText">Task:: {item.text}</span>
-                <button className="actionButton" onClick={this.deleteItem.bind(this, index)}>Delete</button>
+                <span className="listText" title={item.text}>{item.text}</span>
+                <span className="taskState">{item.taskState}</span>
+                <div className="buttons">
+                  <button className="actionButton" onClick={this.editItem.bind(this, index)}>
+                    Edit</button>
+                  <button className="actionButton" onClick={this.markCompletedItem.bind(this, index)}>
+                    Mark as Complete</button>
+                  <button className="actionButton" onClick={this.deleteItem.bind(this, index)}>Delete</button>
+                </div>
               </li>
             )
           })
