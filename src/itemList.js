@@ -2,12 +2,12 @@ import React from 'react';
 
 export default class ItemList extends React.Component {
 
-  deleteItem(index) {
-    this.props.deleteItem(index);
+  removeItem(index) {
+    this.props.removeItem(index);
   }
 
-  markCompletedItem(index) {
-    this.props.markCompletedItem(index);
+  markDoneItem(index) {
+    this.props.markDoneItem(index);
   }
 
   editItem(index) {
@@ -15,26 +15,26 @@ export default class ItemList extends React.Component {
   }
 
   render() {
-    let items  = this.props.listItems;
+    let { listItems }  = this.props;
     return (
-      <div>
-        { items.length > 0 &&
+      <div className="TableBox">
+        { listItems.length > 0 &&
           <div className="Table">
             <div className="CellHeadings">Description</div>
             <div className="CellHeadings">Status</div>
             <div className="CellHeadings">Actions</div>
             {
-              items.map((item, index) => {
+              listItems.map((item, index) => {
                 return (
                   <div key={index} className="Row">
                     <div className="Cell" title={item.text}>{item.text}</div>
                     <div className="Cell">{item.taskState}</div>
                     <div className="Cell">
-                      <button className="actionButton" onClick={this.editItem.bind(this, index)}>
+                      <button  type="button" className="btn btn-secondary" onClick={this.editItem.bind(this, index)}>
                     Edit</button>
-                      <button className="actionButton" onClick={this.markCompletedItem.bind(this, index)}>
-                    Mark as Complete</button>
-                      <button className="actionButton" onClick={this.deleteItem.bind(this, index)}>Delete</button>
+                      <button  type="button" className="btn btn-secondary" disabled={item.taskState === 'Done'} onClick={this.markDoneItem.bind(this, index)}>
+                    Done</button>
+                      <button  type="button" className="btn btn-secondary" onClick={this.removeItem.bind(this, index)}>Remove</button>
                     </div>
                   </div>
                 );
