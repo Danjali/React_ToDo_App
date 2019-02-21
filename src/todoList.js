@@ -7,47 +7,58 @@ export default class TodoList extends React.Component {
     super();
     this.state = {
       items: [],
+      value: '',
       searchedItems:[],
       taskState: 'To Do',
       buttonType: 'Add'
     };
     this.addItem = this.addItem.bind(this);
-    this.deleteItem = this.deleteItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
     this.searchItem = this.searchItem.bind(this);
-    this.markCompletedItem = this.markCompletedItem.bind(this);
+    this.markDoneItem = this.markDoneItem.bind(this);
     this.editItem = this.editItem.bind(this);
   }
 
   addItem() {
-    let inputText = this.refs.taskInput.value;
+    let inputText = this.state.value;
     if (this.state.buttonType === 'Update') {
       this.state.items[this.editItemId].text = inputText;
     } else if(inputText) {
       this.state.items = [...this.state.items, {text: inputText, taskState: this.state.taskState}];
     }
-
-    this.refs.taskInput.value = '';
+    this.state.value = '';
     this.setState({
       searchedItems: this.state.items,
       buttonType: 'Add'
     });
   }
 
-  deleteItem(id) {
-    this.setState({
-      searchedItems: [...this.state.searchedItems].filter((items,key) => key !== id)
-    });
-  }
-
-  markCompletedItem(id) {
-    this.state.items[id].taskState = 'Completed';
+  removeItem(id) {
+    this.state.items = [...this.state.items].filter((items,key) => key !== id);
     this.setState({
       searchedItems: this.state.items
     });
   }
 
+  markDoneItem(id) {
+    this.state.items[id].taskState = 'Done';
+    this.sortList(this.state.items);
+    // this.setState({
+    //   searchedItems: this.state.items
+    // });
+  }
+
+  sortList(list){
+    list = list.sort((a, b) => {
+      return b.taskState.localeCompare(a.taskState);
+    });
+    this.setState({
+      searchedItems: list
+    });
+  }
+
   editItem(id) {
-    this.refs.taskInput.value = this.state.items[id].text;
+    this.state.value = this.state.items[id].text;
     this.editItemId = id;
     this.setState({
       searchedItems: this.state.items,
@@ -66,16 +77,16 @@ export default class TodoList extends React.Component {
     let { items,searchedItems,buttonType} = this.state;
     return (
       <div className="list">
-        <h1>ToDo List</h1>
+        <span className="AppHeader">ToDo App</span>
         <div>
-          <input className="input" ref="taskInput" size="40" type="text" placeholder="Enter Task"/>
-          <button onClick={this.addItem}>{buttonType}</button>
-          {items.length>0 &&
+          <input className="input" size="40" type="text" onChange={e => this.setState({ value: e.target.value })} value={this.state.value} placeholder="Enter Task"/>
+          <button onClick={this.addItem} type="button" className="btn btn-primary" disabled={!this.state.value}>{buttonType}</button>
+          {items.length > 0 &&
             <ItemSearch searchItem={this.searchItem}/>
           }
         </div>
         <div>
-          <ItemList listItems={searchedItems} deleteItem={this.deleteItem} markCompletedItem={this.markCompletedItem} editItem={this.editItem}/>
+          <ItemList listItems={searchedItems} removeItem={this.removeItem} markDoneItem={this.markDoneItem} editItem={this.editItem}/>
         </div>
       </div>
     );
