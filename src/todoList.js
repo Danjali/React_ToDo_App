@@ -1,14 +1,15 @@
 import React from 'react';
 import ItemList from './itemList';
 import ItemSearch from './itemSearch';
+import ToDoList from './static/toDoList.json'
 
 export default class TodoList extends React.Component {
   constructor() {
     super();
     this.state = {
-      items: [],
+      items: ToDoList.taskList,
       value: '',
-      searchedItems:[],
+      searchedItems: ToDoList.taskList,
       taskState: 'To Do',
       buttonType: 'Add'
     };
@@ -43,9 +44,6 @@ export default class TodoList extends React.Component {
   markDoneItem(id) {
     this.state.items[id].taskState = 'Done';
     this.sortList(this.state.items);
-    // this.setState({
-    //   searchedItems: this.state.items
-    // });
   }
 
   sortList(list){
@@ -67,7 +65,7 @@ export default class TodoList extends React.Component {
   }
 
   searchItem(searchValue) {
-    const result = [...this.state.items].filter(item => item.text.search(searchValue.toLowerCase()) > -1);
+    const result = [...this.state.items].filter(item => item.text.toLowerCase().search(searchValue.toLowerCase()) > -1);
     this.setState({
       searchedItems: result
     });
@@ -76,7 +74,7 @@ export default class TodoList extends React.Component {
   render() {
     let { items,searchedItems,buttonType} = this.state;
     return (
-      <div className="list">
+      <div className="List">
         <span className="AppHeader">ToDo App</span>
         <div>
           <input className="input" size="40" type="text" onChange={e => this.setState({ value: e.target.value })} value={this.state.value} placeholder="Enter Task"/>

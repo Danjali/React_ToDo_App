@@ -30,7 +30,7 @@ export default class ItemList extends React.Component {
                     <div className="Cell" title={item.text}>{item.text}</div>
                     <div className="Cell">{item.taskState}</div>
                     <div className="Cell">
-                      <button  type="button" className="btn btn-secondary" onClick={this.editItem.bind(this, index)}>
+                      <button  type="button" className="btn btn-secondary" disabled={item.taskState === 'Done'} onClick={this.editItem.bind(this, index)}>
                     Edit</button>
                       <button  type="button" className="btn btn-secondary" disabled={item.taskState === 'Done'} onClick={this.markDoneItem.bind(this, index)}>
                     Done</button>
