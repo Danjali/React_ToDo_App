@@ -56,10 +56,9 @@ export default class TodoList extends React.Component {
   }
 
   editItem(id) {
-    this.state.value = this.state.items[id].text;
     this.editItemId = id;
     this.setState({
-      searchedItems: this.state.items,
+      value: [...this.state.items][id].text,
       buttonType: 'Update'
     });
   }
@@ -72,13 +71,13 @@ export default class TodoList extends React.Component {
   }
 
   render() {
-    let { items,searchedItems,buttonType} = this.state;
+    let { items,searchedItems,buttonType, value } = this.state;
     return (
       <div className="List">
         <span className="AppHeader">ToDo App</span>
         <div>
-          <input className="input" size="40" type="text" onChange={e => this.setState({ value: e.target.value })} value={this.state.value} placeholder="Enter Task"/>
-          <button onClick={this.addItem} type="button" className="btn btn-primary" disabled={!this.state.value}>{buttonType}</button>
+          <input className="input" size="40" type="text" onChange={e => this.setState({ value: e.target.value })} value={value} placeholder="Enter Task"/>
+          <button onClick={this.addItem} type="button" className="btn btn-primary" disabled={!value}>{buttonType}</button>
           {items.length > 0 &&
             <ItemSearch searchItem={this.searchItem}/>
           }

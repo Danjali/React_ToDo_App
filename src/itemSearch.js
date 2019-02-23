@@ -6,11 +6,11 @@ export default class ItemSearch extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange(){
+  handleInputChange() {
     this.props.searchItem(this.refs.searchInput.value);
   }
 
-  render(){
+  render() {
     return (
       <div className="SearchWrapper">
         <input className="input"
