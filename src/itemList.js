@@ -15,19 +15,19 @@ export default class ItemList extends React.Component {
   render() {
     let { listItems }  = this.props;
     return (
-      <div className="TableBox">
+      <div className="tableBox">
         { listItems.length > 0 &&
-          <div className="Table">
-            <div className="CellHeadings">Description</div>
-            <div className="CellHeadings">Status</div>
-            <div className="CellHeadings">Actions</div>
+          <div className="table">
+            <div className="cellHeadings">Description</div>
+            <div className="cellHeadings">Status</div>
+            <div className="cellHeadings">Actions</div>
             {
               listItems.map((item, index) => {
                 return (
                   <div key={index} className="Row">
-                    <div className="Cell" title={item.text}>{item.text}</div>
-                    <div className="Cell">{item.taskState}</div>
-                    <div className="Cell">
+                    <div className="cell" title={item.text}>{item.text}</div>
+                    <div className="cell">{item.taskState}</div>
+                    <div className="cell">
                       <button  type="button" className="btn btn-secondary" disabled={item.taskState === 'Done'} onClick={this.editItem.bind(this, index)}>
                     Edit</button>
                       <button  type="button" className="btn btn-secondary" disabled={item.taskState === 'Done'} onClick={this.markDoneItem.bind(this, index)}>

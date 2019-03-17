@@ -72,8 +72,8 @@ export default class TodoList extends React.Component {
   render() {
     let { items,searchedItems,buttonType, value } = this.state;
     return (
-      <div className="List">
-        <span className="AppHeader">ToDo App</span>
+      <div className="list">
+        <span className="appHeader">ToDo App</span>
         <div>
           <input className="input" size="40" type="text" onChange={e => this.setState({ value: e.target.value })} value={value} placeholder="Enter Task"/>
           <button onClick={this.addItem} type="button" className="btn btn-primary" disabled={!value}>{buttonType}</button>

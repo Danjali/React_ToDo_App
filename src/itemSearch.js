@@ -10,7 +10,7 @@ export default class ItemSearch extends React.Component {
 
   render() {
     return (
-      <div className="SearchWrapper">
+      <div className="searchWrapper">
         <input className="input"
           ref="searchInput"
           type="text"
