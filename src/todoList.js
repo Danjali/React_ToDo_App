@@ -1,7 +1,6 @@
-import React from 'react';
 import ItemList from './itemList';
 import ItemSearch from './itemSearch';
-import ToDoList from './static/toDoList.json'
+import ToDoList from './static/toDoList.json';
 
 export default class TodoList extends React.Component {
   constructor() {
@@ -46,7 +45,7 @@ export default class TodoList extends React.Component {
     this.sortList(this.state.items);
   }
 
-  sortList(list){
+  sortList(list) {
     list = list.sort((a, b) => {
       return b.taskState.localeCompare(a.taskState);
     });

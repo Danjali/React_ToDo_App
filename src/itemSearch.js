@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default class ItemSearch extends React.Component {
   constructor(props) {
     super();
