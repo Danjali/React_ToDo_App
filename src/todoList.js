@@ -1,14 +1,14 @@
-import React from 'react';
 import ItemList from './itemList';
 import ItemSearch from './itemSearch';
+import ToDoList from './static/toDoList.json';
 
 export default class TodoList extends React.Component {
   constructor() {
     super();
     this.state = {
-      items: [],
+      items: ToDoList.taskList,
       value: '',
-      searchedItems:[],
+      searchedItems: ToDoList.taskList,
       taskState: 'To Do',
       buttonType: 'Add'
     };
@@ -43,12 +43,9 @@ export default class TodoList extends React.Component {
   markDoneItem(id) {
     this.state.items[id].taskState = 'Done';
     this.sortList(this.state.items);
-    // this.setState({
-    //   searchedItems: this.state.items
-    // });
   }
 
-  sortList(list){
+  sortList(list) {
     list = list.sort((a, b) => {
       return b.taskState.localeCompare(a.taskState);
     });
@@ -58,29 +55,28 @@ export default class TodoList extends React.Component {
   }
 
   editItem(id) {
-    this.state.value = this.state.items[id].text;
     this.editItemId = id;
     this.setState({
-      searchedItems: this.state.items,
+      value: [...this.state.items][id].text,
       buttonType: 'Update'
     });
   }
 
   searchItem(searchValue) {
-    const result = [...this.state.items].filter(item => item.text.search(searchValue.toLowerCase()) > -1);
+    const result = [...this.state.items].filter(item => item.text.toLowerCase().search(searchValue.toLowerCase()) > -1);
     this.setState({
       searchedItems: result
     });
   }
 
   render() {
-    let { items,searchedItems,buttonType} = this.state;
+    let { items,searchedItems,buttonType, value } = this.state;
     return (
       <div className="list">
-        <span className="AppHeader">ToDo App</span>
+        <span className="appHeader">ToDo App</span>
         <div>
-          <input className="input" size="40" type="text" onChange={e => this.setState({ value: e.target.value })} value={this.state.value} placeholder="Enter Task"/>
-          <button onClick={this.addItem} type="button" className="btn btn-primary" disabled={!this.state.value}>{buttonType}</button>
+          <input className="input" size="40" type="text" onChange={e => this.setState({ value: e.target.value })} value={value} placeholder="Enter Task"/>
+          <button onClick={this.addItem} type="button" className="btn btn-primary" disabled={!value}>{buttonType}</button>
           {items.length > 0 &&
             <ItemSearch searchItem={this.searchItem}/>
           }

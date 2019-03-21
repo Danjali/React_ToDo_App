@@ -20,12 +20,12 @@ body {
     margin-right: auto;
     background: darkgray;
 }
-.AppHeader {
+.appHeader {
     font-size: 30px;
     font-weight: bold;
     padding-left: 360px;
 }
-.TableBox {
+.tableBox {
     padding-bottom: 15px;
 }
 .button[disabled], html input[disabled] {
@@ -36,10 +36,10 @@ body {
     float: right;
     margin-right: 3px;
 }
-.Warning {
+.warning {
     color: red;
 }
-.Table {
+.table {
     display: table;
     width: 815px;
     margin-left: auto;
@@ -52,7 +52,7 @@ body {
     display: table-row;
     font-size: 16px;
 }
-.Cell {
+.cell {
     display: table-cell;
     border-width: thin;
     border-top: 2px solid lightgrey;
@@ -63,7 +63,7 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.CellHeadings {
+.cellHeadings {
     display: table-cell;
     border-width: thin;
     padding : 5px;

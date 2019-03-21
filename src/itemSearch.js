@@ -1,16 +1,14 @@
-import React from 'react';
-
 export default class ItemSearch extends React.Component {
   constructor(props) {
     super();
     this.handleInputChange = this.handleInputChange.bind(this);
   }
 
-  handleInputChange(){
+  handleInputChange() {
     this.props.searchItem(this.refs.searchInput.value);
   }
 
-  render(){
+  render() {
     return (
       <div className="searchWrapper">
         <input className="input"
