@@ -22,30 +22,34 @@ export default class TodoList extends React.Component {
   addItem() {
     let inputText = this.state.value;
     if (this.state.buttonType === 'Update') {
-      this.state.items[this.editItemId].text = inputText;
+      let copyItems =  [...this.state.items];
+      copyItems[this.editItemId].text = inputText;
+      this.setState({
+        items: copyItems,
+        buttonType: 'Add',
+        value: ''
+      });
     } else if(inputText) {
-      this.state.items = [...this.state.items, {text: inputText, taskState: this.state.taskState}];
+      this.setState({
+        items: [...this.state.items, {text: inputText, taskState: this.state.taskState}],
+        searchedItems: [...this.state.items, {text: inputText, taskState: this.state.taskState}],
+        value: ''
+      });
     }
-    this.state.value = '';
-    this.setState({
-      searchedItems: this.state.items,
-      buttonType: 'Add'
-    });
   }
 
   removeItem(id) {
-    this.state.items = [...this.state.items].filter((items,key) => key !== id);
+    const updatedListAfterRemove = [...this.state.items].filter((items,key) => key !== id);
     this.setState({
-      searchedItems: this.state.items
+      searchedItems: updatedListAfterRemove
     });
   }
 
   markDoneItem(id) {
-    this.state.items[id].taskState = 'Done';
+    let newState = Object.assign({}, this.state);
+    newState.items[id].taskState = 'Done';
+    this.setState({newState});
     this.sortList(this.state.items);
-    // this.setState({
-    //   searchedItems: this.state.items
-    // });
   }
 
   sortList(list){
@@ -58,9 +62,9 @@ export default class TodoList extends React.Component {
   }
 
   editItem(id) {
-    this.state.value = this.state.items[id].text;
     this.editItemId = id;
     this.setState({
+      value: this.state.items[id].text,
       searchedItems: this.state.items,
       buttonType: 'Update'
     });
