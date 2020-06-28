@@ -20,19 +20,19 @@ export default class TodoList extends React.Component {
   }
 
   addItem() {
-    let inputText = this.state.value;
+    let {value} = this.state;
     if (this.state.buttonType === 'Update') {
       let copyItems =  [...this.state.items];
-      copyItems[this.editItemId].text = inputText;
+      copyItems[this.editItemId].text = value;
       this.setState({
         items: copyItems,
         buttonType: 'Add',
         value: ''
       });
-    } else if(inputText) {
+    } else if(value) {
       this.setState({
-        items: [...this.state.items, {text: inputText, taskState: this.state.taskState}],
-        searchedItems: [...this.state.items, {text: inputText, taskState: this.state.taskState}],
+        items: [...this.state.items, {text: value, taskState: this.state.taskState}],
+        searchedItems: [...this.state.items, {text: value, taskState: this.state.taskState}],
         value: ''
       });
     }
