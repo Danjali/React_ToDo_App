@@ -18,7 +18,6 @@ export default class TodoList extends React.Component {
     this.markDoneItem = this.markDoneItem.bind(this);
     this.editItem = this.editItem.bind(this);
   }
-
   addItem() {
     let {value} = this.state;
     if (this.state.buttonType === 'Update') {
@@ -81,7 +80,7 @@ export default class TodoList extends React.Component {
     let { items,searchedItems,buttonType} = this.state;
     return (
       <div className="list">
-        <span className="AppHeader">ToDo App</span>
+        <span className="AppHeader">ToDo Apps</span>
         <div>
           <input className="input" size="40" type="text" onChange={e => this.setState({ value: e.target.value })} value={this.state.value} placeholder="Enter Task"/>
           <button onClick={this.addItem} type="button" className="btn btn-primary" disabled={!this.state.value}>{buttonType}</button>
